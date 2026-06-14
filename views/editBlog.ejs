@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <title>Edit Article | Blogify</title>
+</head>
+
+<body class="bg-surface min-h-screen">
+
+    <%- include('partials/nav') %>
+
+    <main class="max-w-4xl mx-auto px-6 py-10">
+
+        <div
+            class="
+            bg-white
+            rounded-3xl
+            shadow-card
+            overflow-hidden
+            "
+        >
+
+            <div
+                class="
+                bg-gradient-to-r
+                from-[#248E41]
+                to-[#47AB5A]
+                text-white
+                p-8
+                "
+            >
+
+                <h1 class="text-4xl font-extrabold mb-2">
+                    Edit Article
+                </h1>
+
+                <p class="text-green-100">
+                    Update your article and keep it fresh.
+                </p>
+
+            </div>
+
+            <form
+                action="/blog/edit/<%= blog._id %>"
+                method="POST"
+                class="p-8"
+            >
+
+                <div class="mb-6">
+
+                    <label
+                        class="
+                        block
+                        text-sm
+                        font-semibold
+                        text-gray-700
+                        mb-2
+                        "
+                    >
+                        Blog Title
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        value="<%= blog.title %>"
+                        required
+                        class="
+                        w-full
+                        border
+                        border-gray-300
+                        rounded-xl
+                        p-4
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-[#248E41]
+                        "
+                    >
+
+                </div>
+
+                <div class="mb-8">
+
+                    <label
+                        class="
+                        block
+                        text-sm
+                        font-semibold
+                        text-gray-700
+                        mb-2
+                        "
+                    >
+                        Content
+                    </label>
+
+                    <textarea
+                        name="body"
+                        rows="14"
+                        required
+                        class="
+                        w-full
+                        border
+                        border-gray-300
+                        rounded-xl
+                        p-4
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-[#248E41]
+                        "
+                    ><%= blog.body %></textarea>
+
+                </div>
+
+                <div class="flex gap-4">
+
+                    <button
+                        type="submit"
+                        class="
+                        bg-[#248E41]
+                        hover:bg-[#00591D]
+                        text-white
+                        px-8
+                        py-3
+                        rounded-xl
+                        font-semibold
+                        transition
+                        "
+                    >
+                        Update Article
+                    </button>
+
+                    <a
+                        href="/blog/<%= blog._id %>"
+                        class="
+                        bg-gray-200
+                        hover:bg-gray-300
+                        text-gray-700
+                        px-8
+                        py-3
+                        rounded-xl
+                        font-semibold
+                        transition
+                        "
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <%- include('partials/script') %>
+
+</body>
+</html>

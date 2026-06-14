@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <title><%= blog.title %> | Blogify</title>
+</head>
+
+<body class="bg-surface min-h-screen">
+
+    <%- include('partials/nav') %>
+
+    <main class="max-w-5xl mx-auto px-6 py-10">
+
+        <article
+            class="
+            bg-white
+            rounded-3xl
+            overflow-hidden
+            shadow-card
+            "
+        >
+
+            <img
+                src="/<%= blog.coverImageURL %>"
+                alt="<%= blog.title %>"
+                class="
+                w-full
+                h-[500px]
+                object-cover
+                "
+            >
+
+            <div class="p-8 md:p-12">
+
+                <h1
+                    class="
+                    text-4xl
+                    md:text-5xl
+                    font-extrabold
+                    text-gray-900
+                    mb-6
+                    "
+                >
+                    <%= blog.title %>
+                </h1>
+
+                <div
+                    class="
+                    flex
+                    flex-wrap
+                    items-center
+                    justify-between
+                    gap-4
+                    mb-8
+                    pb-6
+                    border-b
+                    "
+                >
+
+                    <div class="flex items-center gap-4">
+
+                        <img
+                            src="/<%= blog.created_by.profileImageURL %>"
+                            class="
+                            w-14
+                            h-14
+                            rounded-full
+                            border-2
+                            border-[#248E41]
+                            "
+                        >
+
+                        <div>
+
+                            <p class="font-semibold text-lg">
+                                <%= blog.created_by.fullName %>
+                            </p>
+
+                            <p class="text-sm text-gray-500">
+                                <%= blog.createdAt.toDateString() %>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <% if(user && user._id === blog.created_by._id.toString()) { %>
+
+                    <div class="flex gap-3">
+
+                        <a
+                            href="/blog/edit/<%= blog._id %>"
+                            class="
+                            bg-yellow-500
+                            hover:bg-yellow-600
+                            text-white
+                            px-5
+                            py-2
+                            rounded-xl
+                            transition
+                            "
+                        >
+                            Edit
+                        </a>
+
+                        <form
+                            action="/blog/delete/<%= blog._id %>"
+                            method="POST"
+                        >
+
+                            <button
+                                class="
+                                bg-red-600
+                                hover:bg-red-700
+                                text-white
+                                px-5
+                                py-2
+                                rounded-xl
+                                transition
+                                "
+                                onclick="return confirm('Delete this blog?')"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <% } %>
+
+                </div>
+
+                <div
+                    class="
+                    text-gray-700
+                    text-lg
+                    leading-9
+                    whitespace-pre-wrap
+                    "
+                >
+                    <%= blog.body %>
+                </div>
+
+            </div>
+
+        </article>
+
+        <section
+            class="
+            mt-10
+            bg-white
+            rounded-3xl
+            p-8
+            shadow-card
+            "
+        >
+
+            <div
+                class="
+                flex
+                items-center
+                justify-between
+                mb-6
+                "
+            >
+
+                <h2
+                    class="
+                    text-2xl
+                    font-bold
+                    "
+                >
+                    Comments
+                </h2>
+
+                <span
+                    class="
+                    bg-[#248E41]
+                    text-white
+                    px-4
+                    py-1
+                    rounded-full
+                    text-sm
+                    "
+                >
+                    <%= comments.length %>
+                </span>
+
+            </div>
+
+            <% if (locals.user) { %>
+
+            <form
+                action="/blog/comment/<%= blog._id %>"
+                method="POST"
+                class="mb-8"
+            >
+
+                <textarea
+                    name="content"
+                    rows="4"
+                    placeholder="Share your thoughts..."
+                    class="
+                    w-full
+                    border
+                    border-gray-300
+                    rounded-2xl
+                    p-4
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-[#248E41]
+                    "
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="
+                    mt-4
+                    bg-[#248E41]
+                    hover:bg-[#00591D]
+                    text-white
+                    px-6
+                    py-3
+                    rounded-xl
+                    transition
+                    "
+                >
+                    Post Comment
+                </button>
+
+            </form>
+
+            <% } else { %>
+
+            <div
+                class="
+                bg-gray-100
+                rounded-2xl
+                p-4
+                mb-8
+                text-gray-600
+                "
+            >
+                Sign in to join the discussion.
+            </div>
+
+            <% } %>
+
+            <% if(comments.length === 0){ %>
+
+            <div class="text-center py-10">
+
+                <p class="text-gray-500">
+                    No comments yet.
+                </p>
+
+            </div>
+
+            <% } %>
+
+            <% comments.forEach(comment => { %>
+
+            <div
+                class="
+                bg-gray-50
+                rounded-2xl
+                p-5
+                mb-4
+                "
+            >
+
+                <div
+                    class="
+                    flex
+                    items-center
+                    gap-3
+                    mb-3
+                    "
+                >
+
+                    <img
+                        src="/<%= comment.created_by.profileImageURL %>"
+                        class="
+                        w-10
+                        h-10
+                        rounded-full
+                        "
+                    >
+
+                    <span class="font-medium">
+                        <%= comment.created_by.fullName %>
+                    </span>
+
+                </div>
+
+                <p
+                    class="
+                    text-gray-700
+                    whitespace-pre-wrap
+                    "
+                >
+                    <%= comment.content %>
+                </p>
+
+            </div>
+
+            <% }) %>
+
+        </section>
+
+    </main>
+
+    <%- include('partials/script') %>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<nav class="bg-[#00591D] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <div class="h-16 flex items-center justify-between">
+
+      <!-- LEFT -->
+      <div class="flex items-center gap-10">
+
+        <a href="/" class="text-3xl font-bold">
+          Blogify
+        </a>
+
+        <div class="flex items-center gap-6">
+          <a href="/" class="hover:text-green-200">Home</a>
+
+          <% if(locals.user){ %>
+            <a href="/blog/add-new" class="hover:text-green-200">
+              Write
+            </a>
+          <% } %>
+        </div>
+
+      </div>
+
+      <!-- CENTER -->
+      <form action="/" method="GET" class="hidden lg:flex">
+
+        <input
+          type="text"
+          name="search"
+          placeholder="Search articles..."
+          class="w-80 px-4 py-2 text-black rounded-l-xl focus:outline-none"
+        >
+
+        <button
+          class="bg-[#248E41] hover:bg-[#47AB5A] px-5 rounded-r-xl transition"
+        >
+          Search
+        </button>
+
+      </form>
+
+      <!-- RIGHT -->
+      <% if(locals.user){ %>
+
+        <div class="flex items-center gap-3">
+
+          <img
+            src="/<%= locals.user.profileImageURL %>"
+            class="w-10 h-10 rounded-full border-2 border-green-300"
+          >
+
+          <span class="font-medium">
+            <%= locals.user.fullName %>
+          </span>
+
+          <a
+            href="/user/logout"
+            class="text-green-200 hover:text-white"
+          >
+            Logout
+          </a>
+
+        </div>
+
+      <% } else { %>
+
+        <div class="flex items-center gap-3">
+
+          <a href="/user/signin" class="hover:text-green-200">
+            Sign In
+          </a>
+
+          <a
+            href="/user/signup"
+            class="bg-white text-[#00591D] px-4 py-2 rounded-xl font-semibold"
+          >
+            Get Started
+          </a>
+
+        </div>
+
+      <% } %>
+
+    </div>
+
+  </div>
+</nav>

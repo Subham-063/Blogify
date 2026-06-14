@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <title>Sign In | Blogify</title>
+</head>
+
+<body class="bg-surface min-h-screen">
+
+    <%- include('partials/nav') %>
+
+    <main
+        class="
+        min-h-[80vh]
+        flex
+        items-center
+        justify-center
+        px-6
+        py-10
+        "
+    >
+
+        <div
+            class="
+            w-full
+            max-w-md
+            bg-white
+            rounded-3xl
+            shadow-card
+            overflow-hidden
+            "
+        >
+
+            <div
+                class="
+                bg-gradient-to-r
+                from-[#248E41]
+                to-[#47AB5A]
+                text-white
+                p-8
+                text-center
+                "
+            >
+
+                <h1 class="text-4xl font-extrabold mb-2">
+                    Welcome Back
+                </h1>
+
+                <p class="text-green-100">
+                    Sign in to continue writing and reading.
+                </p>
+
+            </div>
+
+            <form
+                action="/user/signin"
+                method="POST"
+                class="p-8"
+            >
+
+                <div class="mb-5">
+
+                    <label
+                        for="email"
+                        class="
+                        block
+                        text-sm
+                        font-semibold
+                        text-gray-700
+                        mb-2
+                        "
+                    >
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="Enter your email"
+                        class="
+                        w-full
+                        border
+                        border-gray-300
+                        rounded-xl
+                        p-4
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-[#248E41]
+                        "
+                    >
+
+                </div>
+
+                <div class="mb-8">
+
+                    <label
+                        for="password"
+                        class="
+                        block
+                        text-sm
+                        font-semibold
+                        text-gray-700
+                        mb-2
+                        "
+                    >
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        placeholder="Enter your password"
+                        class="
+                        w-full
+                        border
+                        border-gray-300
+                        rounded-xl
+                        p-4
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-[#248E41]
+                        "
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="
+                    w-full
+                    bg-[#248E41]
+                    hover:bg-[#00591D]
+                    text-white
+                    py-4
+                    rounded-xl
+                    font-semibold
+                    transition
+                    "
+                >
+                    Sign In
+                </button>
+
+                <p
+                    class="
+                    text-center
+                    text-gray-500
+                    mt-6
+                    "
+                >
+                    Don't have an account?
+
+                    <a
+                        href="/user/signup"
+                        class="
+                        text-[#248E41]
+                        font-semibold
+                        "
+                    >
+                        Create one
+                    </a>
+                </p>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <%- include('partials/script') 
+</body>
+</html>
