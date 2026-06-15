@@ -12,9 +12,10 @@ const app = express() ;
 
 const PORT = process.env.PORT || 8000 ;
 
-mongoDB.connect(process.env.MONGO_URL).then((e) => {
-console.log("MongoDB connected") ;
-})
+mongoDB.connect(process.env.MONGO_URL)
+.then(() => console.log("MongoDB connected"))
+.catch(err => console.error("MongoDB Error:", err));
+
 app.use(express.urlencoded({extended: false}) ) ;
 app.use(express.static(path.resolve('./public')));
 app.use(cookieParser()) ;
